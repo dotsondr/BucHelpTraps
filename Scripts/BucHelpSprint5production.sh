@@ -44,7 +44,7 @@ if [[ -z $(docker ps | grep "0.0.0.0:80->80") ]];
   then
 		echo ""
 		echo "Staring $imageLocation at port 80..."
-		docker run -d -e APILOCATION=http://$ipaddr:8080 -p80:80 --rm $imageLocation 
+		docker run --restart unless-stopped -d -e APILOCATION=http://$ipaddr:8080 -p80:80 $imageLocation 
        
 	else
 		#cut the container ID from the docker ps command. 
@@ -58,5 +58,5 @@ if [[ -z $(docker ps | grep "0.0.0.0:80->80") ]];
 		#run the container specified by the user.
 		echo ""
 		echo "Staring $imageLocation at port 80..."
-		docker run -p80:80 -d --rm $imageLocation 
+		docker run --restart unless-stopped -d -e APILOCATION=http://$ipaddr:8080 -p80:80 $imageLocation 
 fi

@@ -56,5 +56,5 @@ if [[ -z $(docker ps | grep "0.0.0.0:5000->80") ]];
 		#run the container specified by the user.
 		echo ""
 		echo "Staring $imageLocation at port 5000..."
-		docker run -p5000:80 -d --rm $imageLocation 
+		docker run -d -e APILOCATION=http://$ipaddr:8080 -p5000:80 --rm $imageLocation
 fi
